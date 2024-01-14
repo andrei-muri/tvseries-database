@@ -1,0 +1,73 @@
+/* Header Styles */
+.header {
+    background-color: #333; /* Dark background */
+    padding: 15px 90px;
+}
+
+.header .container1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+/* Search Form Styles */
+.header form {
+    display: flex;
+    gap: 10px;
+}
+
+.header input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    width:700px;
+}
+
+.header button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* Link and Button Styles */
+.header a {
+    color: white;
+    font-family: "Arial Black", serif;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.header form button {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.header a:hover, .header form button:hover {
+    background-color: #007bff; /* Highlight on hover */
+}
+
+
+.header .username {
+color: red;
+padding: 5px;
+margin-left: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

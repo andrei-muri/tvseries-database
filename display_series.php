@@ -10,7 +10,7 @@ $genresQuery = "SELECT * FROM genres"; // Adjust this query to match your genres
 $genresResult = $conn->query($genresQuery);
 ?>
 
-    <form action="display_series.php" method="get">
+    <form class="form-filters" action="display_series.php" method="get">
 
         <!-- Genre Filter -->
         <label for="genre">Genre:</label>
@@ -75,12 +75,13 @@ $result = $conn->query($query);
     <div class="series-list">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="series-item">
-                <!-- Link to the series details page with the series ID -->
-                <a href="series_details.php?series_id=<?php echo $row['series_id']; ?>&src=display_series.php">
-                    <?php echo $row['series_name'] ?>
-                    <?php echo $row['start_year'] ?>
-                    <?php echo $row['end_year'] ?>
-                </a>
+                <img src="uploads/<?php echo $row['img']; ?>" alt="Series Image">
+                <div class="series-info">
+                    <div class="series-name"><?php echo htmlspecialchars($row['series_name']); ?></div>
+                    <div class="series-rating">Rating: <?php echo htmlspecialchars($row['rating']); ?> ★</div>
+                    <div class="series-year"><?php echo htmlspecialchars($row['start_year']); ?> - <?php echo htmlspecialchars($row['end_year']); ?></div>
+                </div>
+                <a href="series_details.php?series_id=<?php echo $row['series_id']; ?>&src=display_series.php" class="series-buttons">View Details</a>
             </div>
         <?php endwhile; ?>
     </div>

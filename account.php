@@ -10,3 +10,7 @@ include "config.php";
 <form action="delete_account.php" method="post">
     <button type="submit" value="Delete">Delete account</button>
 </form>
+
+<form action="logout.php" method="post">
+    <button type="submit" value="logout">Logout</button>
+</form>
