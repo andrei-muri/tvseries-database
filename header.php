@@ -13,6 +13,10 @@ if (isset($_SESSION["user_id"])) {
 <div style="background-color: black">
     <div class="container d-flex justify-content-end text-white " style="gap: 50px">
         <?php if ($username !== null): ?>
+        <form action="display_series.php" method="get">
+            <input type="text" id="name" name="name" placeholder="Search series">
+            <button type="submit">Search!</button>
+        </form>
         <div style="color: red"><?php echo $username ?></div>
             <a href="index.php">Home</a>
             <a href="account.php">Account</a>

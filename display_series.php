@@ -44,6 +44,13 @@ $query = "SELECT series.*, AVG(reviews.rating) AS average_rating FROM series LEF
 // Apply genre filter
 if (!empty($genre)) {
     $query .= " JOIN series_genres ON series.series_id = series_genres.series_id WHERE series_genres.genre_id = " . intval($genre);
+    if (isset($_GET['name'])) {
+        $name = $_GET['name'];
+        $query .= " AND series.series_name LIKE '%$name%'";
+    }
+} else if (isset($_GET['name'])) {
+    $name = $_GET['name'];
+    $query .= " WHERE series.series_name LIKE '%$name%'";
 }
 
 $query .= " GROUP BY series.series_id";
@@ -61,8 +68,12 @@ switch ($sort) {
 $result = $conn->query($query);
 ?>
 
+<?php if ($result->num_rows < 1) : ?>
+    <h3>No series found!</h3>
+<?php endif; ?>
+
     <div class="series-list">
-        <?php while($row = $result->fetch_assoc()): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
             <div class="series-item">
                 <!-- Link to the series details page with the series ID -->
                 <a href="series_details.php?series_id=<?php echo $row['series_id']; ?>&src=display_series.php">
