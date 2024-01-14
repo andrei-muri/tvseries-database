@@ -3,7 +3,7 @@ include "header.php";
 include "config.php";
 ?>
 
-<form action="change_password.php" method="post">
+<form action="change_password_form.php" method="post">
     <button type="submit" value="Change Password">Change Password</button>
 </form>
 
