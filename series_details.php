@@ -38,6 +38,16 @@ if ($seriesId) {
             echo "<h2>" . $directorRow['director_name'] . "</h2>";
         }
 
+        //display characters played by actor
+        $selectCharactersQuery = "SELECT * FROM actors a RIGHT JOIN characters c ON a.actor_id = c.actor_id
+                                LEFT JOIN roles r ON c.role_id = r.role_id WHERE c.series_id = $seriesId";
+        $characters = $conn->query($selectCharactersQuery);
+        while ($character = $characters->fetch_assoc()) {
+            echo "<h6>" . $character['character_name'] . " role: " . $character['role_name'] . ". Played by: " .$character['actor_name'] . "</h6>";
+        }
+
+
+        echo "<div style='color : gray'>" . "Reviewed by: " . $row['nb_reviews'] ."</div>";
         //check if series is already a favourite
         if ($user_id != null) {
             $isFav = false;
@@ -78,7 +88,7 @@ if ($seriesId) {
         }
         $result2 = null;
         if ($user_id) {
-            $checkIfRatingExistsQuery = "SELECT * FROM reviews WHERE user_id = $user_id";
+            $checkIfRatingExistsQuery = "SELECT * FROM reviews WHERE user_id = $user_id AND series_id = $seriesId";
             $result2 = $conn->query($checkIfRatingExistsQuery);
             if ($result2->num_rows > 0) {
                 $row = $result2->fetch_assoc();

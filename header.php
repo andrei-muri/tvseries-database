@@ -15,6 +15,7 @@ if (isset($_SESSION["user_id"])) {
         <?php if ($username !== null): ?>
         <div style="color: red"><?php echo $username ?></div>
             <a href="index.php">Home</a>
+            <a href="account.php">Account</a>
             <form action="logout.php" method="post">
                 <button type="submit">Logout</button>
                 <a href="director.php">Add Director</a>

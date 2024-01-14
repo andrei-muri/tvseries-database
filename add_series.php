@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        header("Location: index.php");
+        header("Location: character.php?series_id=" . $seriesId);
         echo "<div class='d-flex justify-content-center' style='background-color: green; color:white; padding:10px;'>Series added successfully!</div>";
     } else {
         echo "Error: " . $conn->error;
