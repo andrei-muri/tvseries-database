@@ -4,6 +4,7 @@ include "config.php";
 require_once 'db.php';
 
 if (isset($_GET['series_id'])) {
+    $src = (isset($_GET['src'])) ? $_GET['src'] : "index.php";
     $seriesId = $_GET['series_id'];
     $userId = $_SESSION['user_id']; // Assuming user is logged in and you have their ID in session
 
@@ -15,6 +16,7 @@ if (isset($_GET['series_id'])) {
         // Display the form with existing review data
         ?>
         <form action="edit_review.php" method="post">
+            <input type="hidden" name="src" value="<?php echo htmlspecialchars($src); ?>">
             <input type="hidden" name="review_id" value="<?php echo $row['review_id']; ?>">
             <input type="hidden" name="series_id" value="<?php echo $seriesId; ?>">
             <label for="rating">Rating:</label>
@@ -23,6 +25,12 @@ if (isset($_GET['series_id'])) {
             <label for="text">Review:</label>
             <textarea name="text"><?php echo $row['text']; ?></textarea>
             <br>
+            <?php if (isset($_SESSION["ratingError"])): ?>
+                <div class="col-6">
+                    <p style="color: red;"><?php echo $_SESSION["ratingError"]; ?></p>
+                    <?php unset($_SESSION["ratingError"]); ?>
+                </div>
+            <?php endif; ?>
             <button type="submit" name="action" value="update">Update Review</button>
             <button type="submit" name="action" value="delete">Delete Review</button>
         </form>
@@ -38,6 +46,7 @@ if (isset($_GET['series_id'])) {
 ?>
 
 <?php
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $seriesId = $_POST['series_id'];
     $reviewId = $_POST['review_id'];
@@ -47,8 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newNbRatings = 0;
     $getNbRatings = "SELECT nb_reviews FROM series WHERE series_id = " . intval($seriesId);
     $result = $conn->query($getNbRatings);
-    if($row = $result->fetch_assoc()) {
+    if ($row = $result->fetch_assoc()) {
         $newNbRatings = $row['nb_reviews'];
+    }
+
+    if ($rating > 10 || $rating < 1) {
+        $_SESSION['ratingError'] = "Give a rating between 1 and 10";
+        header("Location: edit_review.php?series_id=$seriesId");
+        exit();
     }
 
     if ($action == 'update') {
@@ -85,11 +100,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmtSeries->bind_param("dii", $newAvgRating, $newNbRatings, $seriesId);
     $stmtSeries->execute();
 
-//    echo "Redirecting to series ID: $seriesId";
-//    exit();
-// Redirect back to series details or show a success message
-    header("Location: series_details.php?series_id=" . intval($seriesId));
-    exit();
+    switch ($_POST['src']) {
+        case'series_details.php':
+            header("Location: series_details.php?series_id=" . intval($seriesId));
+            exit();
+        case 'your_reviews.php':
+            header("Location: your_reviews.php");
+            exit();
+    }
+
+
 }
 
 $conn->close();

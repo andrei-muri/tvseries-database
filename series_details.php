@@ -139,7 +139,7 @@ if ($result2 && $result2->num_rows > 0) {
 $conn->close();
 ?>
 <?php if ($reviewExists && $user_id): ?>
-    <a href="edit_review.php?series_id=<?php echo $seriesId; ?>">Edit review</a>
+    <a href="edit_review.php?series_id=<?php echo $seriesId; ?>&src=series_details.php">Edit review</a>
 <?php elseif ($user_id): ?>
     <a href="review.php?series_id=<?php echo $seriesId; ?>">Give rating!</a>
 <?php endif; ?>

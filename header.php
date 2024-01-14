@@ -23,6 +23,7 @@ if (isset($_SESSION["user_id"])) {
                 <a href="series.php">Add Series</a>
                 <a href="display_series.php">View Series</a>
                 <a href="favourites.php">View Favourites</a>
+                <a href="your_reviews.php">View Your Reviews</a>
             </form>
         <?php else: ?>
             <a href="login.php">Login</a>
