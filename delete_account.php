@@ -43,15 +43,6 @@ while($review = $result->fetch_assoc()) {
     $stmt->bind_param("di", $newAvg, $intval);
     $stmt->execute();
 
-//    $getRatingQuery = "SELECT rating FROM series WHERE series_id = ?";
-//    $stmt = $conn->prepare($getRatingQuery);
-//    $stmt->bind_param("i", $seriesId);
-//    $stmt->execute();
-//    $result = $stmt->get_result();
-//
-//    if($row = $result->fetch_assoc()) {
-//        $rating = $row['rating'];
-//    }
 }
 
 $deleteAccountQuery = "DELETE FROM users WHERE user_id = ?";
