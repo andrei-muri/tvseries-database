@@ -39,13 +39,13 @@ $genresResult = $conn->query($genresQuery);
 $genre = isset($_GET['genre']) ? $_GET['genre'] : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'rating';
 
-$query = "SELECT series.*, reviews.rating AS review_rating, reviews.text AS review_text FROM series JOIN reviews ON series.series_id = reviews.series_id";
+$query = "SELECT series.*, reviews.rating AS review_rating, reviews.text AS review_text, reviews.user_id AS id FROM series JOIN reviews ON series.series_id = reviews.series_id";
 
 // Apply genre filter
 if (!empty($genre)) {
     $query .= " JOIN series_genres ON series.series_id = series_genres.series_id WHERE series_genres.genre_id = " . intval($genre);
 }
-
+$query .= " WHERE reviews.user_id = " . $_SESSION['user_id'];
 //$query .= " GROUP BY series.series_id";
 
 // Apply sorting
@@ -56,6 +56,8 @@ switch ($sort) {
     case 'chronologically':
         break;
 }
+
+
 
 $result = $conn->query($query);
 ?>
