@@ -16,6 +16,7 @@ if (isset($_SESSION["user_id"])) {
     <link rel="stylesheet" href="display_series.css">
     <link rel="stylesheet" href="filters.css">
     <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="series_details.css">
 </head>
 
 <div class="header">

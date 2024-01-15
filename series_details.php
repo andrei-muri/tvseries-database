@@ -22,65 +22,86 @@ if ($seriesId) {
 
     if ($row = $result->fetch_assoc()) {
         $series_name = $row['series_name'];
-// Display the series details
-        echo "<h2>" . $row['series_name'] . "</h2>";
-        echo "<h2>" . $row['start_year'] . "</h2>";
-        echo "<h2>" . $row['end_year'] . "</h2>";
-        echo "<h2>" . $row['rating'] . "</h2>";
-        if ($row['img']) {
-            echo "<div><img src='uploads/" . $row['img'] . "'></div>";
-        }
 
-        echo "<p>" . $row['details'] . "</p>";
+        //get the genres
+        $getGenresQuery = "SELECT genre_name FROM series s JOIN series_genres sg ON sg.series_id = s.series_id
+                        JOIN genres g ON sg.genre_id = g.genre_id WHERE sg.series_id = $seriesId";
+        $genres = $conn->query($getGenresQuery);
+        ?>
 
-        $director_id = $row['director_id'];
-        $query = "SELECT director_name FROM directors WHERE director_id = $director_id";
-        $directorResult = $conn->query($query);
-        if ($directorRow = $directorResult->fetch_assoc()) {
-            echo "<h2>" . $directorRow['director_name'] . "</h2>";
-        }
+        <div class="series-details-container">
+            <div class="series-image">
+                <?php if ($row['img']): ?>
+                    <img src="uploads/<?php echo htmlspecialchars($row['img']); ?>" alt="Series Image">
+                <?php endif; ?>
+            </div>
 
-        //display characters played by actor
-        $selectCharactersQuery = "SELECT * FROM actors a RIGHT JOIN characters c ON a.actor_id = c.actor_id
-                                LEFT JOIN roles r ON c.role_id = r.role_id WHERE c.series_id = $seriesId";
-        $characters = $conn->query($selectCharactersQuery);
-        while ($character = $characters->fetch_assoc()) {
-            echo "<h6>" . $character['character_name'] . " role: " . $character['role_name'] . ". Played by: " .$character['actor_name'] . "</h6>";
-        }
+            <div class="series-info-wrapper">
+                <h2 class="series-title"><?php echo htmlspecialchars($row['series_name']); ?></h2>
+                <div class="genres-container">
+                    <?php while ($genre = $genres->fetch_assoc()): ?>
+                        <div class="genres-item"><?php echo htmlspecialchars($genre['genre_name']);?></div>
+                    <?php endwhile;?>
+                </div>
+                <div class="series-meta">
+                    <span class="series-year"><?php echo htmlspecialchars($row['start_year']); ?></span> -
+                    <span class="series-year"><?php echo htmlspecialchars($row['end_year']); ?></span>
+                    <span class="series-rating">Rating: <?php echo htmlspecialchars($row['rating']); ?> ★</span>
+                </div>
+                <p class="series-details"><?php echo htmlspecialchars($row['details']); ?></p>
+
+                <?php
+                $director_id = $row['director_id'];
+                $query = "SELECT director_name FROM directors WHERE director_id = $director_id";
+                $directorResult = $conn->query($query);
+                if ($directorRow = $directorResult->fetch_assoc()):
+                    ?>
+                    <h3 class="director-name">Directed by: <?php echo htmlspecialchars($directorRow['director_name']); ?></h3>
+                <?php endif; ?>
+
+                <div class="character-list">
+                    <h3>Cast & Characters:</h3>
+                    <?php
+                    $selectCharactersQuery = "SELECT * FROM actors a RIGHT JOIN characters c ON a.actor_id = c.actor_id
+                                      LEFT JOIN roles r ON c.role_id = r.role_id WHERE c.series_id = $seriesId";
+                    $characters = $conn->query($selectCharactersQuery);
+                    while ($character = $characters->fetch_assoc()):
+                        ?>
+                        <div class="character-item">
+                            <span class="character-name"><?php echo htmlspecialchars($character['character_name']); ?></span>
+                            <span class="role-name">as <?php echo htmlspecialchars($character['role_name']); ?></span>
+                            <span class="actor-name">by <?php echo htmlspecialchars($character['actor_name']); ?></span>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+                <div class="favourite-container">
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+                    <?php
+                    if ($user_id != null) {
+                        $isFav = false;
+                        $check = "SELECT * FROM favourite_series WHERE user_id = $user_id AND series_id = $seriesId";
+                        $result = $conn->query($check);
+                        if ($result->num_rows > 0) {
+                            $isFav = true;
+                        }
+                    }
+
+                    ?>
+                    <?php if ($user_id && $isFav): ?>
+                        <a class="add-fav remove-fav" href="add_delete_favourites.php?series_id=<?php echo $seriesId; ?>&action=delete&series_src=<?php echo $src; ?>&src=series_details.php">-</a> <!-- Filled heart -->
+                    <?php elseif ($user_id): ?>
+                        <a class="add-fav add-to-fav" href="add_delete_favourites.php?series_id=<?php echo $seriesId; ?>&action=add&series_src=<?php echo $src; ?>&src=series_details.php">+</a> <!-- Outlined heart -->
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+        </div>
 
 
+<?php
         echo "<div style='color : gray'>" . "Reviewed by: " . $row['nb_reviews'] ."</div>";
         //check if series is already a favourite
-        if ($user_id != null) {
-            $isFav = false;
-            $check = "SELECT * FROM favourite_series WHERE user_id = $user_id AND series_id = $seriesId";
-            $result = $conn->query($check);
-            if ($result->num_rows > 0) {
-                $isFav = true;
-            }
-        }
-
-        ?>
-        <?php if (isset($_SESSION["addedFav"])): ?>
-            <div class="col-6">
-                <p style="color: green;"><?php echo $_SESSION["addedFav"]; ?></p>
-                <?php unset($_SESSION["addedFav"]); ?>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION["deletedFav"])): ?>
-            <div class="col-6">
-                <p style="color: red;"><?php echo $_SESSION["deletedFav"]; ?></p>
-                <?php unset($_SESSION["deletedFav"]); ?>
-            </div>
-        <?php endif; ?>
-        <?php if ($user_id && $isFav): ?>
-            <a href="add_delete_favourites.php?series_id=<?php echo $seriesId; ?>&action=delete&series_src=<?php echo $src; ?>&src=series_details.php">Remove from
-                favourites</a>
-        <?php elseif ($user_id): ?>
-            <a href="add_delete_favourites.php?series_id=<?php echo $seriesId; ?>&action=add&series_src=<?php echo $src; ?>&src=series_details.php">Add to
-                favourites</a>
-        <?php endif; ?>
-        <?php
         if(isset($_SESSION['user_id'])) {
             $user_id = $_SESSION['user_id'];
             $username = $_SESSION['username'];

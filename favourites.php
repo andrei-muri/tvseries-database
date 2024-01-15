@@ -20,7 +20,7 @@ $results = $conn->query($getFavsQuery);
                     <div class="series-name"><?php echo htmlspecialchars($row['series_name']); ?></div>
                     <div class="series-rating">Rating: <?php echo htmlspecialchars($row['rating']); ?> ★</div>
                     <div class="series-year"><?php echo htmlspecialchars($row['start_year']); ?> - <?php echo htmlspecialchars($row['end_year']); ?></div>
-                    <a href='add_delete_favourites.php?series_id=<?php echo $row['series_id']; ?>&action=delete&src=favourites.php'>Remove from favs</a>
+                    <a href='add_delete_favourites.php?series_id=<?php echo $row['series_id']; ?>&action=delete&src=favourites.php' style="color: #d60000">Remove from favs</a>
                 </div>
                 <a href="series_details.php?series_id=<?php echo $row['series_id']; ?>&src=favourites.php" class="series-buttons">View Details</a>
             </div>

@@ -15,14 +15,14 @@ if($seriesId && $action) {
             $stmt = $conn->prepare($insertQuery);
             $stmt->bind_param("ii", $userId, $seriesId);
             $stmt->execute();
-            $_SESSION['addedFav'] = "Series added successfully!";
+//            $_SESSION['addedFav'] = "Series added successfully!";
             break;
         case 'delete':
             $deleteQuery = "DELETE FROM favourite_series WHERE user_id = $userId AND series_id = $seriesId";
             $stmt = $conn->prepare($deleteQuery);
             $stmt->execute();
             if ($src != "favourites.php") {
-                $_SESSION['deletedFav'] = "Series deleted successfully!";
+//                $_SESSION['deletedFav'] = "Series deleted successfully!";
             }
             break;
     }

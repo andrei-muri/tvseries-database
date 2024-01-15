@@ -46,6 +46,11 @@
     margin-top: 5px;
 }
 
+.user {
+    color: #0056b3;
+    font-weight: bold;
+}
+
 .review-item a:hover {
     background-color: #0056b3;
 }

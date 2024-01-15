@@ -39,6 +39,7 @@ $series_name = isset($_GET['series_name']) ? $_GET['series_name'] : '';
             $username = $usernameResult->fetch_assoc();
             ?>
             <div class="review-item">
+                <div style="color: #0056b3"><?php echo htmlspecialchars($username['username']); ?></div>
                 <div class="star-rating">
                     <div class="star-rating">
                         <?php echo str_repeat('★', intval($review['rating'])); ?>
@@ -53,7 +54,7 @@ $series_name = isset($_GET['series_name']) ? $_GET['series_name'] : '';
             </div>
         <?php endwhile; ?>
     <?php else: ?>
-        <p>No reviews found.</p>
+        <h4>No reviews</h4>
     <?php endif; ?>
 </div>
 

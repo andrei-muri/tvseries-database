@@ -1,0 +1,136 @@
+.series-details-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line on smaller screens */
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensures the box-shadow is visible */
+}
+
+.series-image {
+    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+    max-width: 300px; /* Adjust the max width as necessary */
+    order: 1; /* Order, when stacking on smaller screens */
+}
+
+.series-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.series-info-wrapper {
+    flex: 3 1 600px; /* Flex-grow, flex-shrink, flex-basis */
+    padding: 20px;
+    padding-left: 40px;
+    order: 2; /* Order, when stacking on smaller screens */
+}
+
+.series-title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 0.5em;
+}
+
+.series-meta {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 1em;
+}
+
+.genres-container {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.genres-item {
+    padding: 0 6px;
+    border: 3px solid #555555;
+    border-radius: 15px;
+}
+
+.series-year {
+    margin-right: 0.5em;
+}
+
+.series-rating {
+    color: #ffd700; /* Gold color for rating */
+}
+
+.series-details {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 1em;
+}
+
+.director-name {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.character-list h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.character-item {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
+
+.character-name {
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.role-name {
+    font-style: italic;
+    margin-right: 0.5em;
+}
+
+.actor-name {
+    color: #555;
+}
+.favourite-container {
+    display: flex;
+    justify-content: end;
+}
+
+.add-fav {
+    height: 0;
+    color: red;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 50px; /* Adjust the size as needed */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out; /* Smooth color transition */
+}
+
+.add-fav:hover {
+color: #d10000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .series-details-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .series-image,
+    .series-info-wrapper {
+        flex-basis: 100%; /* Full width */
+        max-width: 100%; /* Full width */
+        order: 0; /* Reset order */
+    }
+
+    .series-image {
+        margin-bottom: 1em;
+    }
+}

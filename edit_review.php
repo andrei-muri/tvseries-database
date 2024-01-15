@@ -69,15 +69,7 @@ if (isset($_GET['series_id'])) {
     } else {
         echo "Review not found.";
     }
-} else {
-    echo "Series ID not provided.";
-}
-
-
-?>
-
-<?php
-
+} else
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $seriesId = $_POST['series_id'];
     $reviewId = $_POST['review_id'];
