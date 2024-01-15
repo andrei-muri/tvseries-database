@@ -1,0 +1,80 @@
+/* Login Container Styling */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.login-title {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Login Form Styling */
+.login-form {
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #DDDDDD;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px); /* Subtracting padding */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.login-form button {
+    width: calc(100% - 20px); /* Subtracting padding */
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px; /* Space above the button */
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Message Box Styling */
+.message-box {
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.message-box.error {
+    background-color: #ffecec;
+    border: 1px solid #d6bcbc;
+    color: #d60000;
+}
+
+.message-box.success {
+    background-color: #eaffea;
+    border: 1px solid #b9dcb9;
+    color: #008000;
+}

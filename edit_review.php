@@ -15,25 +15,56 @@ if (isset($_GET['series_id'])) {
     if ($row = $result->fetch_assoc()) {
         // Display the form with existing review data
         ?>
-        <form action="edit_review.php" method="post">
+            <link rel="stylesheet" href="review.css">
+        <form action="edit_review.php" method="post" class="form-review">
             <input type="hidden" name="src" value="<?php echo htmlspecialchars($src); ?>">
             <input type="hidden" name="review_id" value="<?php echo $row['review_id']; ?>">
             <input type="hidden" name="series_id" value="<?php echo $seriesId; ?>">
-            <label for="rating">Rating:</label>
-            <input type="number" name="rating" value="<?php echo $row['rating']; ?>">
-            <br>
+            <input type="hidden" id="rating" name="rating" value="<?php echo $row['rating']; ?>">
+
+            <div class="star-rating">
+                <?php for ($i = 1; $i <= 10; $i++): ?>
+                    <span class="star" data-value="<?php echo $i; ?>">&#9733;</span>
+                <?php endfor; ?>
+            </div>
+
             <label for="text">Review:</label>
-            <textarea name="text"><?php echo $row['text']; ?></textarea>
+            <textarea id="text" name="text"><?php echo htmlspecialchars($row['text']); ?></textarea>
             <br>
+
             <?php if (isset($_SESSION["ratingError"])): ?>
-                <div class="col-6">
-                    <p style="color: red;"><?php echo $_SESSION["ratingError"]; ?></p>
-                    <?php unset($_SESSION["ratingError"]); ?>
+                <div class="message-box">
+                    <p><?php echo $_SESSION["ratingError"]; ?></p>
                 </div>
+                <?php unset($_SESSION["ratingError"]); ?>
             <?php endif; ?>
-            <button type="submit" name="action" value="update">Update Review</button>
-            <button type="submit" name="action" value="delete">Delete Review</button>
+
+            <div class="action-buttons-container">
+                <button type="submit" name="action" value="update">Update Review</button>
+                <button type="submit" name="action" value="delete">Delete Review</button>
+            </div>
         </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const stars = document.querySelectorAll('.star-rating .star');
+                const ratingInput = document.getElementById('rating');
+
+                stars.forEach((star, index) => {
+                    star.addEventListener('click', () => {
+                        ratingInput.value = index + 1; // Update the hidden input value
+                        highlightStars(index);
+                    });
+                });
+
+                function highlightStars(index) {
+                    stars.forEach((star, idx) => {
+                        star.style.color = idx <= index ? 'gold' : 'white'; // Fill or empty the stars
+                    });
+                }
+            });
+
+        </script>
         <?php
     } else {
         echo "Review not found.";
@@ -106,6 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         case 'your_reviews.php':
             header("Location: your_reviews.php");
+            exit();
+        case 'all_series_review.php':
+            header("Location: all_series_reviews.php?series_id=". $seriesId);
             exit();
     }
 

@@ -31,6 +31,8 @@ if ($seriesId) {
             echo "<div><img src='uploads/" . $row['img'] . "'></div>";
         }
 
+        echo "<p>" . $row['details'] . "</p>";
+
         $director_id = $row['director_id'];
         $query = "SELECT director_name FROM directors WHERE director_id = $director_id";
         $directorResult = $conn->query($query);

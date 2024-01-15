@@ -10,7 +10,7 @@ $genresQuery = "SELECT * FROM genres"; // Adjust this query to match your genres
 $genresResult = $conn->query($genresQuery);
 ?>
 
-    <form action="your_reviews.php" method="get">
+    <form class="form-filters" action="your_reviews.php" method="get">
 
         <!-- Genre Filter -->
         <label for="genre">Genre:</label>
@@ -60,13 +60,21 @@ switch ($sort) {
 $result = $conn->query($query);
 ?>
 
+    <link rel="stylesheet" href="your_reviews.css">
     <div class="review-list">
+        <?php if ($result->num_rows < 1): ?>
+        <h3>No reviews</h3>
+        <?php endif; ?>
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="review-item">
-                <h3><?php echo $row['series_name'] ?></h3>
-                <?php echo $row['review_rating'] ?>
-                <?php echo $row['review_text'] ?>
-                <a href="edit_review.php?series_id=<?php echo $row['series_id']; ?>&src=your_reviews.php">Edit</a>
+                <h3><?php echo htmlspecialchars($row['series_name']); ?></h3>
+                <div class="star-rating">
+                    <?php echo str_repeat('★', intval($row['review_rating'])); ?>
+                    <?php echo str_repeat('☆', 10 - intval($row['review_rating'])); ?>
+                    <span style="color: #666666"><?php echo intval($row['review_rating']) ?></span>
+                </div>
+                <div class="review-text"><?php echo htmlspecialchars($row['review_text']); ?></div>
+                <a href="edit_review.php?series_id=<?php echo htmlspecialchars($row['series_id']); ?>&src=your_reviews.php">Edit</a>
             </div>
         <?php endwhile; ?>
     </div>

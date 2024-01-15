@@ -1,0 +1,85 @@
+/* General Form Styles */
+.form-review {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-review label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-review input[type="number"],
+.form-review textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-review textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Message Box for Errors */
+.message-box {
+    color: #d9534f; /* Bootstrap's `btn-danger` color */
+    background-color: #f2dede; /* Bootstrap's `bg-danger` background */
+    border-color: #ebccd1; /* Bootstrap's `border-danger` color */
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Submit Button Styles */
+.form-review button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Bootstrap's `btn-success` color */
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    width: auto; /* Button width as per content */
+    display: block; /* Center the button */
+    margin: 10px auto; /* Margin top and bottom with auto sides for centering */
+}
+
+.form-review button:hover {
+    background-color: #0056b3; /* Darken the button color slightly on hover */
+}
+
+/* Star Rating Styles */
+.star-rating {
+    color: white; /* Default empty color */
+    cursor: pointer;
+    font-size: 25px; /* Adjust the size of stars */
+    margin-bottom: 15px; /* Space below the stars */
+}
+
+.star-rating .star {
+    color: gold; /* Color for filled stars */
+    padding: 0 5px; /* Space between stars */
+    cursor: pointer;
+    text-shadow: 0 0 2px #b59410;
+}
+
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+    color: white; /* Color when hovered and for stars to the right */
+}
+
+.action-buttons-container {
+    display: flex;
+    justify-content: center;
+}

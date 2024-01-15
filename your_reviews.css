@@ -1,0 +1,65 @@
+/* Review List Container */
+.review-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual Review Item */
+.review-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-item h3 {
+    margin: 0 0 10px 0;
+    color: #000000;
+}
+
+/* Star Rating */
+.star-rating {
+    color: gold;
+    margin-right: 5px;
+}
+
+/* Review Text */
+.review-text {
+    margin: 10px 0;
+}
+
+/* Edit Review Link */
+.review-item a {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.review-item a:hover {
+    background-color: #0056b3;
+}
+
+go {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+go:hover {
+    background-color: #0056b3;
+}

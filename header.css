@@ -21,7 +21,7 @@
     padding: 5px;
     border: none;
     border-radius: 5px;
-    width:700px;
+    width:400px;
 }
 
 .header button {
@@ -64,6 +64,15 @@ padding: 5px;
 margin-left: 50px;
 }
 
+@media (max-width: 1500px) {
+    .header input[type="text"] {
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        width:300px;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header .container {
@@ -71,3 +80,4 @@ margin-left: 50px;
         gap: 10px;
     }
 }
+

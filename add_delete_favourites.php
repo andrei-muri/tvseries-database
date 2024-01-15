@@ -21,7 +21,9 @@ if($seriesId && $action) {
             $deleteQuery = "DELETE FROM favourite_series WHERE user_id = $userId AND series_id = $seriesId";
             $stmt = $conn->prepare($deleteQuery);
             $stmt->execute();
-            $_SESSION['deletedFav'] = "Series deleted successfully!";
+            if ($src != "favourites.php") {
+                $_SESSION['deletedFav'] = "Series deleted successfully!";
+            }
             break;
     }
 

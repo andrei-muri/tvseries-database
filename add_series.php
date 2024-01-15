@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_img_name = 0;
     $end_year = $_POST["end_year"];
     $director_id = $_POST["director_id"];
+    $details = $_POST['details'];
 
     $error = false;
 
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
 
-    $insertQuery = "INSERT INTO series (series_name, start_year, end_year, isRunning, director_id, img, nb_reviews, rating) VALUES ('$series_name', '$start_year', '$end_year', '$isRunning', '$director_id', '$new_img_name', 0, 0);";
+    $insertQuery = "INSERT INTO series (series_name, start_year, end_year, isRunning, director_id, img, nb_reviews, rating, details) VALUES ('$series_name', '$start_year', '$end_year', '$isRunning', '$director_id', '$new_img_name', 0, 0, '$details');";
 
     if ($conn->query($insertQuery) === TRUE) {
         $seriesId = $conn->insert_id; // Get the last inserted series ID
