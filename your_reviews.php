@@ -6,7 +6,7 @@ require_once 'db.php';
 //$query = "SELECT * FROM series"; // Adjust the query according to your database structure
 //$result = $conn->query($query);
 
-$genresQuery = "SELECT * FROM genres"; // Adjust this query to match your genres table structure
+$genresQuery = "SELECT * FROM genres";
 $genresResult = $conn->query($genresQuery);
 ?>
 
@@ -23,12 +23,10 @@ $genresResult = $conn->query($genresQuery);
             <?php endwhile; ?>
         </select>
 
-        <!-- Sorting Options -->
         <label for="sort">Sort by:</label>
         <select id="sort" name="sort">
             <option value="rating">Rating</option>
             <option value="chronologically">Chronologically</option>
-            <!-- Additional sorting options can be added here -->
         </select>
 
         <button type="submit">Apply Filters</button>
@@ -44,8 +42,11 @@ $query = "SELECT series.*, reviews.rating AS review_rating, reviews.text AS revi
 // Apply genre filter
 if (!empty($genre)) {
     $query .= " JOIN series_genres ON series.series_id = series_genres.series_id WHERE series_genres.genre_id = " . intval($genre);
+    $query .= " AND reviews.user_id = " . $_SESSION['user_id'];
+} else {
+    $query .= " WHERE reviews.user_id = " . $_SESSION['user_id'];
 }
-$query .= " WHERE reviews.user_id = " . $_SESSION['user_id'];
+
 //$query .= " GROUP BY series.series_id";
 
 // Apply sorting
@@ -54,6 +55,7 @@ switch ($sort) {
         $query .= " ORDER BY reviews.rating DESC";
         break;
     case 'chronologically':
+        $query .= " ORDER BY review_id DESC";
         break;
 }
 

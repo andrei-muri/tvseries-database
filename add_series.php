@@ -71,11 +71,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     }
-
+    if($isRunning) {
+        $end_year = 2024;
+    }
     $insertQuery = "INSERT INTO series (series_name, start_year, end_year, isRunning, director_id, img, nb_reviews, rating, details) VALUES ('$series_name', '$start_year', '$end_year', '$isRunning', '$director_id', '$new_img_name', 0, 0, '$details');";
 
-    if ($conn->query($insertQuery) === TRUE) {
-        $seriesId = $conn->insert_id; // Get the last inserted series ID
+    $insertQuery = "INSERT INTO series (series_name, start_year, end_year, isRunning, director_id, img, nb_reviews, rating, details) VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?);";
+
+    $stmt = $conn->prepare($insertQuery);
+    $stmt->bind_param("siiisss", $series_name, $start_year, $end_year, $isRunning, $director_id, $new_img_name, $details);
+    $stmt->execute();
+
+    if ( TRUE) {
+        $seriesId = $stmt->insert_id; // Get the last inserted series ID
 
         // Get all genres
         $getGenresQuery = "SELECT genre_id FROM genres";

@@ -38,11 +38,16 @@
 .series-item .series-name {
     font-size: 18px;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: block;
 }
 
 .series-item .series-rating {
     font-size: 16px;
-    color: #ffc107; /* Star rating color */
+    color: #ffc107;
     margin-bottom: 5px;
 }
 

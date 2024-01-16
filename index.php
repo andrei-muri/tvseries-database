@@ -3,7 +3,7 @@ include "config.php";
 include "header.php";
 require_once "db.php";
 
-$getFanFavouritesQuery = "SELECT * FROM series ORDER BY rating DESC LIMIT 7";
+$getFanFavouritesQuery = "SELECT * FROM series ORDER BY rating DESC LIMIT 6";
 $fanFavourites = $conn->query($getFanFavouritesQuery);
 
 $getGenresQuery = "SELECT * FROM genres";
@@ -35,7 +35,7 @@ echo "<h2 class='categories-title'>Fan Favourites</h2><br>";
 while ($genre = $genres->fetch_assoc()) {
     $getTopSeriesByGenreQuery = "SELECT * FROM series s JOIN series_genres sg ON s.series_id = sg.series_id
                             JOIN genres g ON sg.genre_id = g.genre_id WHERE g.genre_id = " . intval($genre['genre_id']) .
-        " ORDER BY s.rating DESC LIMIT 7";
+        " ORDER BY s.rating DESC LIMIT 6";
     echo "<h2 class='categories-title'>Top " . $genre['genre_name'] . "</h2>";
     $topSeriesByGenre = $conn->query($getTopSeriesByGenreQuery);
     ?>

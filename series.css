@@ -1,4 +1,3 @@
-/* General Form Styles */
 .form-series {
     max-width: 500px;
     margin: 25px auto;
@@ -66,18 +65,17 @@
 }
 
 
-.genres-container {
+.genres-container-add {
     margin-bottom: 15px;
 }
 
-/* Individual Checkbox with Label */
 .genre-checkbox {
-    display: flex; /* Use flexbox layout */
+    display: flex;
     gap: 8px;
-    align-items: center; /* Align items vertically in the center */
-    margin-bottom: 5px; /* Add some space below each checkbox */
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 .genre-checkbox input[type="checkbox"] {
-    margin-right: 5px; /* Add some space between the checkbox and the label */
+    margin-right: 5px;
 }

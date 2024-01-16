@@ -29,6 +29,8 @@ $series_name = isset($_GET['series_name']) ? $_GET['series_name'] : '';
 
     if ($sortMethod === 'rating') {
         $reviewGetQuery .= " ORDER BY rating DESC";
+    } elseif($sortMethod === 'chronologically') {
+        $reviewGetQuery .= " ORDER BY review_id DESC";
     }
 
     $reviews = $conn->query($reviewGetQuery);

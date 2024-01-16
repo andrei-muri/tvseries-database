@@ -42,7 +42,7 @@ $conn->close();
         <?php endwhile; ?>
     </select>
     <!-- Genres -->
-    <div class="genres-container">
+    <div class="genres-container-add">
         <div>Genres:</div>
         <?php while ($genre = $genresResult->fetch_assoc()): ?>
             <div class="genre-checkbox">
