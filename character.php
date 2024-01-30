@@ -1,4 +1,5 @@
 <?php
+global $conn;
 include "header.php";
 include "config.php";
 require_once "db.php";

@@ -6,9 +6,9 @@ include "header.php";
     <link rel="stylesheet" href="sign_up.css">
 </head>
 
-<div class="signup-container">
-    <h1 class="signup-title">Sign Up</h1>
-    <form class="signup-form" action="add_user.php" method="post">
+<div class="form-container">
+    <h1 class="form-title">Sign Up</h1>
+    <form class="form-design" action="add_user.php" method="post">
         <label for="username">User Name:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
@@ -19,11 +19,11 @@ include "header.php";
         <input type="password" id="confirm_password" name="confirm_password" required>
         <br><br>
         <?php if (isset($_SESSION["registrationError"])): ?>
-            <div class="signup-message error">
+            <div class="message-box error">
                 <p><?php echo $_SESSION["registrationError"]; ?></p>
             </div>
             <?php unset($_SESSION["registrationError"]); ?>
         <?php endif; ?>
-        <button type="submit" class="signup-button">Add User</button>
+        <button type="submit">Add User</button>
     </form>
 </div>

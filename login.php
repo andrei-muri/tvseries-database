@@ -3,9 +3,9 @@ include "config.php";
 include "header.php";
 ?>
 
-<div class="login-container">
-    <h1 class="login-title">Login</h1>
-    <form class="login-form" action="check_user.php" method="POST">
+<div class="form-container">
+    <h1 class="form-title">Login</h1>
+    <form class="form-design" action="check_user.php" method="POST">
         <label for="username">User Name:</label>
         <input type="text" id="username" name="username" required>
         <br><br>
